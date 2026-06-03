@@ -10,7 +10,7 @@ import { FaMoon } from "react-icons/fa";
 function Navbar() {
   return (
     <div className="py-4 px-12 flex relative">
-        <div className="flex items-center gap-2 p-4">
+        <div className="flex items-center gap-2 pt-4 pr-5 bg-white/50 h-22 rounded-xl shadow-[0_0_30px_rgba(255,255,255,1)]">
           <img src={logo} alt="logo" className="w-32 h-22 -mt-2" />
           {/* <div> */}
             <img src={logoName} alt="logo-name" className="w-30 h-10 -ml-4 -mt-2" />
