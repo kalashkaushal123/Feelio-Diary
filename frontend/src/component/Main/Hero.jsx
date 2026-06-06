@@ -41,7 +41,7 @@ function Hero() {
           <p className="text-purple-900 mt-3 mx-10 w-[20rem] text-center">A safe place for your thoughts, emotions, and precious memories.</p>
 
           <div className="mt-6">
-            <button className="flex bg-pink-500 text-white px-6 py-3 rounded-full items-center ml-28">
+            <button className="flex bg-pink-500 text-white px-6 py-3 rounded-full items-center ml-28 hover:bg-pink-600 transition-all duration-300 hover:px-7 hover:py-4 shadow-lg hover:shadow-xl hover:text-xl hover:font-semibold cursor-pointer">
               <FaPenFancy className="text-xl mr-3 border-b-2" /> Start Writing
             </button>
           </div>
@@ -53,7 +53,7 @@ function Hero() {
       </div>
 
       <div className="bg-white/60 w-[90rem] h-62 mx-10 -mt-10 z-50 rounded-4xl px-8 py-6 flex gap-4">
-        <div className="relative flex bg-[rgba(255,209,220,0.6)] border-2 border-white shadow-[0_0_40px_rgba(255,209,220,0.9)] rounded-4xl w-[24rem] h-52 p-2">
+        <div className="relative flex bg-[rgba(255,209,220,0.6)] border-2 border-white shadow-[0_0_40px_rgba(255,209,220,0.9)] rounded-4xl w-[24rem] h-48 p-2 transition-all duration-300 hover:-translate-y-3">
           <img src={diary} alt="Diary" className="h-33" />
           <div className="ml-4 mt-2">
             <h2 className="text-2xl text-pink-700 font-semibold">Private Diary</h2>
@@ -62,7 +62,7 @@ function Hero() {
           <FaHeart className="absolute bottom-4 right-4 text-pink-400 text-xl" />
         </div>
 
-        <div className="relative flex bg-[rgba(224,187,255,0.5)] border-2 border-white shadow-[0_0_40px_rgba(224,187,255,0.5)] rounded-4xl w-[24rem] h-52 p-2">
+        <div className="relative flex bg-[rgba(224,187,255,0.5)] border-2 border-white shadow-[0_0_40px_rgba(224,187,255,0.5)] rounded-4xl w-[24rem] h-48 p-2 transition-all duration-300 hover:-translate-y-3">
           <img src={secure} alt="Secure" className="h-33" />
           <div className="ml-4 mt-2">
             <h2 className="text-2xl text-purple-700 font-semibold">Secure & Safe</h2>
@@ -71,7 +71,7 @@ function Hero() {
           <FaHeart className="absolute bottom-4 right-4 text-purple-400 text-xl" />
         </div>
 
-        <div className="relative flex bg-[rgba(255,223,128,0.3)] border-2 border-white shadow-[0_0_40px_rgba(255,223,128,0.3)] rounded-4xl w-[24rem] h-52 p-2">
+        <div className="relative flex bg-[rgba(255,223,128,0.3)] border-2 border-white shadow-[0_0_40px_rgba(255,223,128,0.3)] rounded-4xl w-[24rem] h-48 p-2 transition-all duration-300 hover:-translate-y-3">
           <img src={cloud} alt="Cloud" className="h-26" />
           <div className="ml-4 mt-2">
             <h2 className="text-2xl text-yellow-700 font-semibold">Cloud Storage</h2>
@@ -80,7 +80,7 @@ function Hero() {
           <FaHeart className="absolute bottom-4 right-4 text-yellow-400 text-xl" />
         </div>
 
-        <div className="relative flex bg-[rgba(189,224,254,0.6)] border-2 border-white shadow-[0_0_40px_rgba(189,224,254,0.6)] rounded-4xl w-[24rem] h-52 p-2">
+        <div className="relative flex bg-[rgba(189,224,254,0.6)] border-2 border-white shadow-[0_0_40px_rgba(189,224,254,0.6)] rounded-4xl w-[24rem] h-48 p-2 transition-all duration-300 hover:-translate-y-3">
           <img src={mood} alt="Mood" className="h-26" />
           <div className="ml-4 mt-2">
             <h2 className="text-2xl text-blue-700 font-semibold">Mood Tracking</h2>

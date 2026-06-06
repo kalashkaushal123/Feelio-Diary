@@ -1,18 +1,25 @@
 import { useState } from 'react'
 import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import bgImage from './images/bg-image.jpeg'
 
-import Navbar from './component/Navbar/Navbar'
-import Hero from './component/Main/Hero'
+
+import Root from './root'
+import Login from './component/Auth/Login'
+import Signup from './component/Auth/Signup'
 
 function App() {
 
   return (
     <>
-    <img src={bgImage} alt="Background Image" className="w-screen h-screen fixed -z-50" />
-      <Navbar />
-      <Hero />
+    
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={ <Root /> } />
+        <Route path="/login"  element={ <Login /> } />
+        <Route path="/signup" element={ <Signup /> } />
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
