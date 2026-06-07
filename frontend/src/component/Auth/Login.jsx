@@ -17,8 +17,8 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <div className='w-screen h-screen bg-gradient-to-r from-purple-300 to-pink-300  p-16'>
-      <div className="h-[38rem] bg-cover bg-center rounded-3xl border-2 border-white flex" style={{ backgroundImage: `url(${bgImg1})` }}>
+    <div className='w-screen h-full bg-gradient-to-r from-purple-300 to-pink-300 p-16 max-[769px]:p-8'>
+      <div className="h-[37.5rem] bg-cover bg-center rounded-3xl border-2 border-white flex" style={{ backgroundImage: `url(${bgImg1})` }}>
 
         {/* back */}
         <Link to="/">
@@ -27,13 +27,13 @@ function Login() {
 
         {/* Left side  */}
 
-        <div className='my-14 ml-30 mr-36 flex relative w-[38rem]'>
-          <div className=' rounded-3xl w-[30rem] bg-pink-100/70 p-6'>
-            <img src={heartIcon} alt="heart icon" className='h-20 ml-40 mb-5' />
+        <div className='my-14 xl:ml-30 lg:ml-4 xl:mr-36 lg:mr-8 flex relative xl:w-[38rem] lg:w-[45rem] md:w-[38rem] max-[769px]:mt-16 max-[769px]:-ml-10'>
+          <div className=' rounded-3xl w-[30rem] h-[33rem] bg-pink-100/70 p-6 max-[426px]:w-[20rem]'>
+            <img src={heartIcon} alt="heart icon" className='h-20 ml-40 mb-5 max-[426px]:h-16 max-[426px]:ml-28'/>
             <h1 className='text-4xl font-bold text-pink-800 text-center' style={{fontFamily:'serif'}}>Welcome</h1>
-            <p className='flex ml-33 text-[#7c7575] mb-10'>Glad to see you again <GoHeartFill className='mt-1 ml-1 text-pink-400' /> </p>
+            <p className='flex ml-33 text-[#7c7575] mb-10 max-[426px]:ml-14'>Glad to see you again <GoHeartFill className='mt-1 ml-1 text-pink-400' /> </p>
 
-            <form className='mx-4'>
+            <form className='mx-4 max-[426px]:mx-0'>
 
               {/* email  */}
               <div className='flex shadow-lg bg-white/70 px-5 py-2 text-pink-900 rounded-lg'>
@@ -62,21 +62,28 @@ function Login() {
               </div>
 
               {/* login button  */}
-              <button className='bg-pink-900 text-white font-bold text-lg w-full py-2 my-10'>
+              <button className='bg-pink-900 text-white font-bold text-lg w-full py-2 mt-8'>
                 Login
               </button>
+
+              <p className='text-center my-5'>
+                Don't have an account?
+                <Link to="/signup" className='text-pink-900 font-semibold underline'>
+                    Sign Up
+                </Link>
+              </p>
             </form>
 
             
           </div>
-          <div className='flex absolute bottom-0 right-0 '>
+          <div className='flex absolute bottom-0 right-0 max-[1025px]:-right-20 max-[1025px]:-bottom-14 max-[769px]:-right-8'>
               <img src={cloud} alt="" className='h-20' />
               <img src={diary} alt="" className='h-20 -ml-7'/>
           </div> 
           <div className=''>
-            <FaHeart className='text-2xl text-pink-600/70 absolute bottom-22 right-14 rotate-10' />
-            <FaHeart className='text-2xl text-pink-600/50 absolute bottom-40 right-3 rotate-20' />
-            <FaHeart className='text-2xl text-pink-600/30 absolute bottom-60 right-10 rotate-20' />
+            <FaHeart className='text-2xl text-pink-600/70 absolute bottom-22 right-14 rotate-10 max-[1025px]:-right-8 max-[769px]:-right-0' />
+            <FaHeart className='text-2xl text-pink-600/50 absolute bottom-40 right-3 rotate-20 max-[1025px]:-right-2 max-[769px]:right-9' />
+            <FaHeart className='text-2xl text-pink-600/30 absolute bottom-60 right-10 rotate-20 max-[1025px]:-right-10 max-[769px]:right-0' />
             
           </div> 
         </div>
@@ -84,7 +91,7 @@ function Login() {
 
         {/* Right side  */}
 
-        <img src={boy} alt="boy" className='h-11/12 mt-12' />
+        <img src={boy} alt="boy" className='xl:h-11/12 xl:mt-12 xl:ml-0 lg:h-10/12 lg:mt-26 lg:ml-3 max-[769px]:hidden' />
 
       </div>
     </div>
