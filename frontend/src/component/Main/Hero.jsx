@@ -109,7 +109,7 @@ function Hero() {
           <h3 className='text-3xl font-bold text-pink-800' style={{fontFamily:"serif"}}>Ready to start your journey?</h3>
           <p className='text-purple-900 font-semibold mt-1 text-md'>Create your safe space and write your story.</p>
           <Link to="/signup">
-            <button className='bg-white rounded-xl px-16 py-3 mt-4 font-bold text-pink-600 cursor-pointer'>
+            <button className='bg-white rounded-xl px-16 py-3 mt-4 font-bold text-pink-600 cursor-pointer hover:bg-pink-600 hover:text-white hover:text-lg hover:scale-105 transition duration-300'>
               Create your Account
             </button>
             

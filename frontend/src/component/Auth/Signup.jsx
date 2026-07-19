@@ -6,6 +6,7 @@ import girl from '../../images/signup-girl.png'
 import heartIcon from '../../images/heart-icon.png'
 import cloud from '../../images/cloud.png'
 import diary from '../../images/diary.png'
+import { useNavigate } from 'react-router-dom'
 
 import { GoHeartFill } from "react-icons/go";
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaHeart } from "react-icons/fa";
@@ -13,8 +14,54 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 
 
 function Signup() {
-
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
+    const user = {
+      username,
+      email,
+      password,
+      confirmPassword
+    }
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/diary/signup/",{
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(user),
+      })
+      const data = await response.json();
+
+      console.log(data);
+
+      if(response.ok){
+        alert("Account created successfully!");
+        
+        localStorage.setItem("access", data.access);
+        localStorage.setItem("refresh", data.refresh);
+
+        navigate("/login")
+      }else{
+        console.log(data.error);
+      }
+      
+    }
+    catch(error){
+      console.log(error);
+      
+    }
+  }
 
   return (
     <div className='w-screen h-full bg-gradient-to-r from-purple-300 to-pink-300 p-16 max-[426px]:p-6'>
@@ -38,15 +85,17 @@ function Signup() {
             <h1 className='text-4xl font-bold text-pink-800 text-center' style={{fontFamily:'serif'}}>Signup </h1>
             <p className='flex ml-33 text-[#7c7575] mb-10 max-[426px]:ml-18'>Glad to see you again <GoHeartFill className='mt-1 ml-1 text-pink-400' /> </p>
 
-            <form className='mx-4 max-[426px]:mx-0'>
-
+            <form className='mx-4 max-[426px]:mx-0' onSubmit={handleSubmit}>
+              
               {/* name  */}
               <div className='flex shadow-lg bg-white/70 px-5 py-2 text-pink-900 rounded-lg'>
                 <FaUser className="mr-3 text-2xl" />
                 <input 
                   type="text" 
-                  name='name'
+                  name='username'
                   placeholder='Enter Name' 
+                  value={username}
+                  onChange={(e)=>setUsername(e.target.value)}
                   className='text-xl w-72 ml-2 outline-none'
                   required />
               </div>
@@ -58,6 +107,8 @@ function Signup() {
                   type="text" 
                   name='email'
                   placeholder='Enter Email' 
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                   className='text-xl w-72 ml-2 outline-none' 
                   required
                   />
@@ -68,10 +119,12 @@ function Signup() {
                 <FaLock className="mr-3 text-2xl" />
                 <input 
                   type={showPassword ? "text" : "password"}
-                  name='email' 
+                  name='password' 
                   placeholder='Enter Password' 
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
                   className='text-xl w-72 ml-2 outline-none' 
-                  required
+                  required  
                   />
 
                 <span
@@ -86,8 +139,10 @@ function Signup() {
               <div className='flex shadow-lg bg-white/70 px-5 py-2 text-pink-900 rounded-lg mt-5'>
                 <FaLock className="mr-3 text-2xl" />
                 <input 
-                  type={showPassword ? "text" : "password"} 
+                  type={showConfirmPassword ? "text" : "password"} 
                   name='confirmPassword'
+                  value={confirmPassword}
+                  onChange={(e)=>setConfirmPassword(e.target.value)}
                   placeholder='Enter Confirm Password' 
                   className='text-xl w-72 ml-2 outline-none' 
                   required
@@ -95,9 +150,9 @@ function Signup() {
 
                 <span
                 className='text-2xl mt-0.5 mr-3'
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </div>
 

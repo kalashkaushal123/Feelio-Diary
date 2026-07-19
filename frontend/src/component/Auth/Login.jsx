@@ -10,11 +10,60 @@ import diary from '../../images/diary.png'
 import { GoHeartFill } from "react-icons/go";
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaHeart } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
-
+import { useNavigate, useLocation } from 'react-router-dom'
 
 function Login() {
-
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+
+  const navigate = useNavigate()
+
+  const user = {
+    username, 
+    password 
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("http://127.0.0.1:8000/diary/login/", {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.log(text); // You'll see the HTML error page or server error
+      return;
+    }
+
+    const data = await response.json()
+        console.log( "Username : ",data.username);
+
+    console.log(data);
+
+    if(response.ok){
+      alert("Login Successfully")
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
+      localStorage.setItem("username", data.username);
+
+      console.log(localStorage.getItem("username", data.username));
+
+      navigate("/home",{
+        state: {
+          username: username
+        }
+      })
+    }else{
+      alert(data.error || "Login failed")
+      console.log(data);
+    }
+  }
 
   return (
     <div className='w-screen h-full bg-gradient-to-r from-purple-300 to-pink-300 p-16 max-[769px]:p-8'>
@@ -33,18 +82,30 @@ function Login() {
             <h1 className='text-4xl font-bold text-pink-800 text-center' style={{fontFamily:'serif'}}>Welcome</h1>
             <p className='flex ml-33 text-[#7c7575] mb-10 max-[426px]:ml-14'>Glad to see you again <GoHeartFill className='mt-1 ml-1 text-pink-400' /> </p>
 
-            <form className='mx-4 max-[426px]:mx-0'>
+            <form className='mx-4 max-[426px]:mx-0' onSubmit={handleSubmit}>
 
-              {/* email  */}
+              {/* name  */}
               <div className='flex shadow-lg bg-white/70 px-5 py-2 text-pink-900 rounded-lg'>
                 <FaUser className="mr-3 text-2xl" />
-                <input type="text" placeholder='Enter Email' className='text-xl w-72 ml-2 outline-none' />
+                <input 
+                type="text" 
+                name='username' 
+                placeholder='Enter Your Name' 
+                value={username}
+                onChange={(e)=>setUsername(e.target.value)}
+                className='text-xl w-72 ml-2 outline-none' />
               </div>
 
               {/* password  */}
               <div className='flex shadow-lg bg-white/70 px-5 py-2 text-pink-900 rounded-lg mt-5'>
                 <FaLock className="mr-3 text-2xl" />
-                <input type={showPassword ? "text" : "password"} placeholder='Enter Password' className='text-xl w-72 ml-2 outline-none' />
+                <input 
+                type={showPassword ? "text" : "password"} 
+                name='password' 
+                placeholder='Enter Password' 
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
+                className='text-xl w-72 ml-2 outline-none' />
 
                 <span
                 className='text-2xl mt-0.5 mr-3'
@@ -62,7 +123,9 @@ function Login() {
               </div>
 
               {/* login button  */}
-              <button className='bg-pink-900 text-white font-bold text-lg w-full py-2 mt-8'>
+              <button
+              type='submit'
+              className='bg-pink-900 text-white font-bold text-lg w-full py-2 mt-8 cursor-pointer'>
                 Login
               </button>
 
@@ -99,3 +162,5 @@ function Login() {
 }
 
 export default Login
+
+
