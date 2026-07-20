@@ -1,7 +1,7 @@
   import { useState, useEffect } from 'react'
   import { Link, Outlet } from 'react-router-dom'
   import { useLocation } from 'react-router-dom'
-
+  import { useNavigate } from 'react-router-dom'
 
   import logo from '../../images/penDiary.png'
   import cloudDiary from '../../images/cloudDiary.png'
@@ -19,6 +19,36 @@
   import { IoIosNotificationsOutline } from "react-icons/io";
 
 function Sidebar({user}) {
+  
+  const navigate = useNavigate()
+
+  const scrollToSection = (id) => {
+    if (window.location.pathname !== "/home"){
+      navigate("/home");
+      setTimeout(()=>{
+        document.getElementById(id)?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      },100)
+    }else{
+      document.getElementById(id)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    localStorage.removeItem("username");
+    // console.log("User logout ");
+    
+
+    navigate("/login")
+  }
+
   return (
     <>
 
@@ -44,17 +74,21 @@ function Sidebar({user}) {
                   My Diary
                 </li>
               </Link>
-              <li className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer hover:bg-pink-300/30 hover:text-pink-700 transition-all duration-300">
+              <li
+              onClick={()=>scrollToSection("moodSection")}
+              className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer hover:bg-pink-300/30 hover:text-pink-700 transition-all duration-300">
                 <FaRegSmile className="text-2xl mr-3" />
                 Mood Tracker
               </li>
-              <li className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer hover:bg-pink-300/30 hover:text-pink-700 transition-all duration-300">
+              {/* <li className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer hover:bg-pink-300/30 hover:text-pink-700 transition-all duration-300">
                 <CiCloudOn className="text-2xl mr-3" />
                 Memories
-              </li>
-              <li className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer hover:bg-pink-300/30 hover:text-pink-700 transition-all duration-300">
+              </li> */}
+              <li 
+              onClick={()=>scrollToSection("calenderSection")}
+              className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer hover:bg-pink-300/30 hover:text-pink-700 transition-all duration-300">
                 <SlCalender className="text-2xl mr-3" />
-                Calender
+                Calendar
               </li>
               {/* <li className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer hover:bg-pink-300/30 hover:text-pink-700 transition-all duration-300">
                 <HiTrendingUp className="text-2xl mr-3" />
@@ -69,10 +103,18 @@ function Sidebar({user}) {
                 Settings
               </li> */}
 
-              <li className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer bg-pink-300/30 text-pink-700 hover:bg-pink-900 hover:text-white transition-all duration-300 capitalize text-xl font-semibold mt-14 mb-6">
+              <li className="flex items-center w-full px-4 py-3 rounded-xl cursor-pointer bg-pink-300/30 text-pink-700 hover:bg-pink-900 hover:text-white transition-all duration-300 capitalize text-xl font-semibold mt-20 mb-2">
                 <BiSolidUserCircle className="text-3xl mr-3" />
                 {user}
               </li>
+
+              {/* <Link to="/login"> */}
+                <li 
+                onClick={handleLogout}
+                className="flex items-center w-full px-4 py-2 rounded-xl cursor-pointer bg-pink-300/30 text-pink-700 hover:bg-pink-900 hover:text-white transition-all duration-300 capitalize text-lg pl-10 font-semibold">
+                  Logout
+                </li>
+              {/* </Link> */}
               
             </ul>
 

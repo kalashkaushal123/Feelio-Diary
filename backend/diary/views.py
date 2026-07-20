@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from .models import Diary
 from .serializers import DiarySerializer
+from datetime import date, timedelta
 
 
 @api_view(["POST"])
@@ -125,6 +126,8 @@ def save_diary(request):
         description = request.data.get("description"),
         words = request.data.get("words"),
         letters = request.data.get("letters"),
+        date = request.data.get("date"),
+        page_type = request.data.get("page_type"),
     )
     serializer = DiarySerializer(diary)
 
@@ -137,3 +140,40 @@ def diary_history(request):
     diaries = Diary.objects.filter(user=request.user).order_by("-created_at")
     serializer = DiarySerializer(diaries, many=True)
     return Response(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def diary_detail(request, pk):
+    try:
+        diary = Diary.objects.get(id=pk, user=request.user)
+    except Diary.DoesNotExist:
+        return Response({"error":"Diary not found"}, status=404)
+    
+    serializer = DiarySerializer(diary)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def dashboard(request):
+    entries = Diary.objects.filter(user=request.user).count()
+    memories = entries
+    today = date.today()
+    dates = set(
+        Diary.objects.filter(user=request.user)
+        .values_list("date",flat=True)
+        .distinct()
+    )
+
+    streak = 0
+
+    while today in dates:
+        streak += 1
+        today -= timedelta(days=1)
+
+    return Response({
+        "entries" : entries,
+        "memories" : memories,
+        "streak" : streak
+    })

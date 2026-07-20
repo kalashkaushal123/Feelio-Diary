@@ -17,15 +17,19 @@ function Page1() {
 
   const letterCounter = text.replace(/\s/g,"").length;
 
-  const date = new Date()
-//   console.log(date);
+  const currentDate = new Date()
+//   console.log(currentDate);
+
+  const formattedDate = currentDate.toISOString().split("T")[0];
 
 
   const diary = {
     username : localStorage.getItem("username"),
+    date : formattedDate,
     description : text, 
     words : wordCounter,
     letters : letterCounter,
+    page_type : "page1",
   }
 
   const handleSave = async () => {
@@ -75,7 +79,7 @@ function Page1() {
                         className=' absolute left-6 top-6 text-3xl text-orange-900 cursor-pointer' />
                     </Link>
 
-                    <span className=' absolute top-7 left-20 text-orange-900 -900/80 text-xl font-semibold'> { date.toDateString() }</span>
+                    <span className=' absolute top-7 left-20 text-orange-900 -900/80 text-xl font-semibold'> { currentDate.toDateString() }</span>
 
                     <textarea 
                     name="dearDiary" 

@@ -4,6 +4,7 @@ import diaryBg from '../../images/diary-bgImg.png'
 import slide1 from '../../images/slide1.png'
 import slide2 from '../../images/slide2.png'
 import slide3 from '../../images/slide3.png'
+import cardBg from '../../images/cardBg.png'
 
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
@@ -65,6 +66,8 @@ function DiaryOpt() {
         fetchHistory()
     }, [])
 
+    const date = new Date()
+
 
   return (
     <div style={{backgroundImage:`url(${diaryBg})`}} className=' bg-no-repeat h-screen w-screen p-16 '>
@@ -87,7 +90,7 @@ function DiaryOpt() {
                         </div>
                         <div className='mt-5 flex gap-5'>
                             <Link to="/page1">
-                                <img src={slide1} alt="" className='h-40 rounded-2xl' />
+                                <img src={slide1} alt="" className='h-40 rounded-2xl    ' />
                             </Link>
                             <Link to="/page2">
                                 <img src={slide2} alt="" className='h-40 rounded-2xl' />
@@ -123,19 +126,24 @@ function DiaryOpt() {
 
                                 </div>
                             ) : (
-                                <div className='mt-5 flex gap-5 flex-wrap'>
+                                <div className='mt-5 flex gap-5 flex-wrap mb-10'>
                                     {history.map((item, index) => (
-                                        <Link key={item.id} to={`/page/${item.id}`}>
-                                            <div className='bg-white/60 rounded-2xl shoadow-lg p-4 w-56 hover:scale-105 duration-300'>
+                                        <Link key={item.id} to={`/prevpage/${item.id}`}>
+                                            <div className='rounded-2xl shoadow-lg p-4 w-56 hover:scale-105 duration-300 ' style={{backgroundImage: `url(${cardBg})`}}>
                                                 <img src={slide1} alt="" className='h-36 w-full rounded-xl object-cover' />
 
-                                                <p className='mt-3 text-pink-700 font-bold'>Page #{history.length - index}</p>
+                                                {/* <p className='mt-3 text-pink-700 font-bold'>Page #{history.length - index}</p> */}
+
+                                                <p>
+                                                    <span className='text-sm text-gray-700'>{ item.date }</span>
+                                                    {/* <span>{  }</span> */}
+                                                </p>
 
                                                 <p className='text-gray-600 text-sm'>{item.data}</p>
 
-                                                <p className='mt-2 text-purple-800 line-clamp-3'>{item.description}</p>
+                                                <p className='mt-2 text-purple-800 line-clamp-3 overflow-hidden w-48 h-6 truncate'>{item.description}</p>
 
-                                                <div className='mt-3 flex justify-between text-sm text-gray-500'>
+                                                <div className='mt-3 flex justify-between text-sm text-gray-700'>
                                                     <span>{item.words} Words</span>
                                                     <span>{item.letters} Letters</span>
                                                 </div>

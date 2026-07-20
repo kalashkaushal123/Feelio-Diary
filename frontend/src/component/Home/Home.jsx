@@ -33,9 +33,9 @@ import Footer from './Footer'
   function Home() {
 
     const [user, setUser] = useState({username: ""})
-    const [diary, setDiary] = useState("0")
-    const [streak, setStreak] = useState("0")
-    const [memory, setMemory] = useState("0")
+    const [diary, setDiary] = useState(0)
+    const [streak, setStreak] = useState(0)
+    const [memory, setMemory] = useState(0)
 
     useEffect(()=>{
       const fetchProfile = async () => {
@@ -65,8 +65,32 @@ import Footer from './Footer'
 
       fetchProfile();
         
-      },[])
+    },[])
 
+    
+    useEffect(() => {
+      const fetchDashboard = async () => {
+        
+        try {
+
+          const token = localStorage.getItem("access")
+          const response = await fetch(()=>{"http://127.0.0.1:8000/diary/dashboard/",{
+            headers : {
+              Authorization: `Bearer ${token}`
+            },
+          }})
+          const data = await response.json();
+          setDiary(data.entries)
+          setMemory(data.memories)
+          setStreak(data.streak)
+
+        } catch (error) {
+          console.log(error);
+          
+        }
+      }
+      fetchDashboard()
+    }, [])
       
       
     
@@ -135,12 +159,12 @@ import Footer from './Footer'
           </section>
 
 
-          <section className='flex'>
+          <section className='flex' id='moodSection'>
             <section className='mt-20'>
               <Mood />
             </section>
 
-            <section className='mt-20 absolute right-20'>
+            <section className='mt-20 absolute right-20' id='calenderSection'>
               <Calender />
             </section>
           </section>
