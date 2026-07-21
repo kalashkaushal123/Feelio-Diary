@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Diary
 from .serializers import DiarySerializer
 from datetime import date, timedelta
+from django.contrib.auth.hashers import make_password
 
 
 @api_view(["POST"])
@@ -104,6 +105,39 @@ def profile(request):
 
 
 @api_view(["POST"])
+def reset_password(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    confirmPassword = request.data.get("confirmPassword")
+
+    if not email or not password or not confirmPassword:
+        return Response({
+            "error" : "Email, password and confirm password are required"
+        }, status=400)
+    
+    if password != confirmPassword:
+        return Response({
+            "error" : "Passwords do not match"
+        }, status=400)
+    
+    try:
+        user = User.objects.get(email = email)
+
+    except User.DoesNotExist:
+        return Response({
+            "error" : "Email does not exist"
+        }, status=404)
+    
+    user.set_password(password)
+    user.save()
+
+    return Response({
+        "message" : "Password updated successfully"
+    }, status=200)
+
+
+
+@api_view(["POST"])
 def save_diary(request):
     username = request.data.get("username")
 
@@ -166,14 +200,21 @@ def dashboard(request):
         .distinct()
     )
 
-    streak = 0
+    if today not in dates:
+        streak = 0
+    else:
+        streak = 0
 
     while today in dates:
         streak += 1
         today -= timedelta(days=1)
+
+    
 
     return Response({
         "entries" : entries,
         "memories" : memories,
         "streak" : streak
     })
+
+     

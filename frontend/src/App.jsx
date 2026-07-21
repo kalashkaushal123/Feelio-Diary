@@ -15,6 +15,7 @@ import Page1 from './component/pages/Page1'
 import Page2 from './component/pages/Page2'
 import Page3 from './component/pages/Page3'
 import PrevPage from './component/pages/PrevPage'
+import ForgotPassword from './component/Auth/ForgotPassword'
 // import TodyaDiary from './component/Home/TodyaDiary'
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path='/page2' element={ <Page2 /> } />
         <Route path='/page3' element={ <Page3 /> } />
         <Route path='/prevpage/:id' element={ <PrevPage /> } />
+        <Route path='forgetPassword/' element={ <ForgotPassword /> } /> 
         
       </Routes>
     </BrowserRouter>

@@ -117,7 +117,7 @@ function Login() {
 
               {/* forget password  */}
               <div className='text-right mt-5 mr-3 font-semibold text-pink-900 underline'>
-                <Link>
+                <Link to="/forgetPassword">
                   Forget Password ?
                 </Link>
               </div>

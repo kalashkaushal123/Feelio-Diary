@@ -126,10 +126,10 @@ function DiaryOpt() {
 
                                 </div>
                             ) : (
-                                <div className='mt-5 flex gap-5 flex-wrap mb-10'>
+                                <div className='mt-5 flex gap-5 flex-nowrap mb-10 h-78 overflow-x-auto overflow-y-hidden no-scrollbar'>
                                     {history.map((item, index) => (
-                                        <Link key={item.id} to={`/prevpage/${item.id}`}>
-                                            <div className='rounded-2xl shoadow-lg p-4 w-56 hover:scale-105 duration-300 ' style={{backgroundImage: `url(${cardBg})`}}>
+                                        <Link key={item.id} to={`/prevpage/${item.id}`} className='shrink-0'>
+                                            <div className='rounded-2xl shadow-lg p-4 w-56 hover:scale-105 duration-300 my-5' style={{backgroundImage: `url(${cardBg})`}}>
                                                 <img src={slide1} alt="" className='h-36 w-full rounded-xl object-cover' />
 
                                                 {/* <p className='mt-3 text-pink-700 font-bold'>Page #{history.length - index}</p> */}

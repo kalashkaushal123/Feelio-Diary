@@ -26,8 +26,8 @@
   import Sidebar from './Sidebar'
   import TodyaDiary from './TodyaDiary'
   import Mood from './Mood'
-import Calender from './Calender'
-import Footer from './Footer'
+  import Calender from './Calender'
+  import Footer from './Footer'
 
 
   function Home() {
@@ -69,29 +69,62 @@ import Footer from './Footer'
 
     
     useEffect(() => {
-      const fetchDashboard = async () => {
-        
-        try {
+        const fetchDashboard = async () => {
+            try {
+                const token = localStorage.getItem("access");
 
-          const token = localStorage.getItem("access")
-          const response = await fetch(()=>{"http://127.0.0.1:8000/diary/dashboard/",{
-            headers : {
-              Authorization: `Bearer ${token}`
-            },
-          }})
-          const data = await response.json();
-          setDiary(data.entries)
-          setMemory(data.memories)
-          setStreak(data.streak)
+                console.log("Token : ",token);
 
-        } catch (error) {
-          console.log(error);
-          
-        }
-      }
-      fetchDashboard()
-    }, [])
+                if(!token){
+                  console.log("No access token found");
+                  return;
+                }
+                
+
+                const response = await fetch(
+                    "http://127.0.0.1:8000/diary/dashboard/",
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                console.log("Dashboard Response:", response);
+
+                const data = await response.json();
+
+                console.log("Dashboard Data:", data);
+
+                if (!response.ok) {
+                    console.log("Dashboard Error:", data);
+                    return;
+                }
+
+                setDiary(data.entries);
+                setMemory(data.memories);
+                setStreak(data.streak);
+
+            } catch (error) {
+                console.log("Dashboard Fetch Error:", error);
+            }
+        };
+
+        fetchDashboard();
+
+    }, []);
       
+
+    const formatNumber = (number) => {
+      if(number >= 1000000){
+        return (number/1000000).toFixed(1).replace(".0", "") + "M";
+      }
+      if(number >= 1000){
+        return(number/1000).toFixed(1).replace(".0","") + "K";
+      }
+      return number
+    }
       
     
     
@@ -175,7 +208,7 @@ import Footer from './Footer'
               <img src={penDiary} alt="diary" className='h-16 mr-4 mt-3' />
               <div>
                 <h3 className='text-purple-900 font-semibold'>Entries</h3>
-                <p className='text-purple-900 font-bold text-3xl'>{diary}</p>
+                <p className='text-purple-900 font-bold text-3xl'>{formatNumber(diary)}</p>
                 <p className='text-purple-900 text-xs'>Total Entries</p>
               </div>
             </div>
@@ -183,7 +216,7 @@ import Footer from './Footer'
               <img src={streakImage} alt="diary" className='h-16 mr-4 mt-3' />
               <div>
                 <h3 className='text-purple-900 font-semibold'>Streak</h3>
-                <p className='text-purple-900 font-bold text-3xl'>{streak}</p>
+                <p className='text-purple-900 font-bold text-3xl'>{formatNumber(streak)}</p>
                 <p className='text-purple-900 text-xs'>Days in a row</p>
               </div>
             </div>
@@ -191,7 +224,7 @@ import Footer from './Footer'
               <img src={heart} alt="diary" className='h-12 mr-4 mt-5' />
               <div>
                 <h3 className='text-purple-900 font-semibold'>Memories</h3>
-                <p className='text-purple-900 font-bold text-3xl'>{memory}</p>
+                <p className='text-purple-900 font-bold text-3xl'>{formatNumber(memory)}</p>
                 <p className='text-purple-900 text-xs'>Saved Memories</p>
               </div>
             </div>

@@ -50,7 +50,7 @@ function Hero() {
           <p className="text-purple-900 mt-3 mx-10 w-[20rem] text-center">A safe place for your thoughts, emotions, and precious memories.</p>
 
           <div className="xl:mt-6 lg:mt-3 md:mt-2 max-[426px]:mt-4">
-            <Link to="/login">
+            <Link to="/signup">
               <button className="flex bg-pink-500 text-white px-6 py-3 rounded-full items-center ml-28 hover:bg-pink-600 transition-all duration-300 hover:px-7 hover:py-4 shadow-lg hover:shadow-xl hover:text-xl hover:font-semibold cursor-pointer">
                 <FaPenFancy className="text-xl mr-3 border-b-2" /> Start Writing
               </button>
