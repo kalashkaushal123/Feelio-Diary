@@ -20,6 +20,7 @@
   import { HiTrendingUp } from "react-icons/hi";
   import { IoIosLock } from "react-icons/io";
   import { IoMdSettings } from "react-icons/io";
+  import { FaBars } from "react-icons/fa";
 
   import { IoIosNotificationsOutline } from "react-icons/io";
 
@@ -36,6 +37,7 @@
     const [diary, setDiary] = useState(0)
     const [streak, setStreak] = useState(0)
     const [memory, setMemory] = useState(0)
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(()=>{
       const fetchProfile = async () => {
@@ -125,6 +127,19 @@
       }
       return number
     }
+
+
+    const currentHour = new Date().getHours();
+
+    let greeting;
+
+    if(currentHour < 12){
+      greeting = "Good Morning";
+    } else if(currentHour < 18){
+      greeting = "Good Afternoon";
+    } else{
+      greeting = "Good Evening"
+    }
       
     
     
@@ -140,19 +155,35 @@
 
           {/* slidebar  */}
 
-        <Sidebar user={user.username || "User"}></Sidebar>
+        {/* {
+          isOpen ? (
+            <Sidebar user={user.username || "User"} isOpen={isOpen} setIsOpen={setIsOpen}></Sidebar>
+          ) : (
+            <FaBars onClick={() => setIsOpen(true)} className='fixed top-5 left-5 z-[60] text-3xl text-pink-700 cursor-pointer lg:hidden' />
+          )
+        } */}
+        {/* <FaBars />/ */}
+
+        <FaBars 
+        onClick={() => setIsOpen(true)} 
+        className='fixed top-5 left-5 z-[60] text-3xl text-pink-700 cursor-pointer lg:hidden' />
+
+        <Sidebar 
+        user={user.username || "User"} 
+        isOpen={isOpen} setIsOpen={setIsOpen}></Sidebar>
+        
 
           {/* background image  */}
 
           <section className=''>
             <div
             style={{backgroundImage:`url(${Char})`}}
-            alt="Home Character" className="absolute right-5 top-[6rem] w-[60rem] h-[65rem] bg-contain bg-no-repeat pointer-events-none -z-50">
+            alt="Home Character" className="absolute xl:right-5 lg:-right-8 md:-right-22 xl:top-[6rem] lg:top-[10.8rem] md:top-[10rem] xl:w-[60rem] lg:w-[50rem] md:w-[45rem] xl:h-[65rem] lg:h-[50rem] md:h-[45rem] bg-contain bg-no-repeat pointer-events-none -z-50">
             </div>  
           
           </section>
 
-          <section className=' absolute bg-white/60 text-purple-900/80 p-6 rounded-4xl right-32 top-24 -rotate-15'>
+          <section className=' absolute bg-white/60 text-purple-900/80 p-6 rounded-4xl xl:right-32 lg:right-0 md:right-0 xl:top-24 lg:top-18 md:top-22 -rotate-15 xl:block lg:block md:block hidden'>
             <span className='text-pink-700 font-semibold text-lg capitalize'>
               Hii {user.username || "User"} 👋🏻 ,
             </span> <br />
@@ -163,18 +194,18 @@
 
         {/* Main Content  */}
 
-        <section className="absolute top-0 left-80 right-4 bottom-4 ">
+        <section className="absolute top-0 xl:left-80 lg:left-72 md:left-10 right-4 bottom-4 ">
 
           {/* head  */}
 
-          <section className="flex flex-col gap-2 text-gray-500 mt-20 text-2xl font-semibold">
-            <span>Good Morning</span>
-            <span className="text-6xl font-bold text-pink-800 capitalize">{ user.username || "User" }</span>
+          <section className="flex flex-col gap-2 text-gray-500 mt-20 xl:text-2xl lg:text-2xl md:text-2xl text-xl font-semibold">
+            <span>{greeting}</span>
+            <span className="xl:text-6xl lg:text-6xl md:text-6xl text-5xl font-bold text-pink-800 capitalize">{ user.username || "User" }</span>
             <span>Glad to see you here!</span>
           </section>
 
 
-          <section className='bg-white/60 rounded-2xl text-center w-70 mt-10 py-6 px-10 gap-3 relative'>
+          <section className='bg-white/60 rounded-2xl text-center w-70 mt-10 xl:py-6 lg:py-6 md:py-6 py-3 xl:px-10 lg:px-10 md:px-10 px-4 gap-3 relative'>
             <span className='text-pink-600 font-bold '>
               — ❤️ —
             </span> <br />
@@ -193,39 +224,41 @@
 
 
           <section className='flex' id='moodSection'>
-            <section className='mt-20'>
+            <section className='xl:mt-20 lg:mt-20 md:mt-20 mt-80'>
               <Mood />
             </section>
 
-            <section className='mt-20 absolute right-20' id='calenderSection'>
+            <section className='xl:mt-20 lg:mt-12 md:-mt-4 mt-10 absolute xl:right-12 lg:right-0 md:-right-12' id='calenderSection'>
               <Calender />
             </section>
           </section>
 
 
-          <section className='flex gap-5 w-[40rem] mt-10 rounded-2xl'>
-            <div className='w-48 h-32 bg-white/50 rounded-2xl flex py-6 px-3 cursor-pointer'>
+          <section className='xl:flex lg:block md:flex xl:gap-3 md:gap-5 xl:w-[40rem] lg:w-[25rem] mt-10 rounded-2xl'>
+            <div className='xl:w-48 lg:w-48 md:w-48 w-70 xl:ml-0 lg:ml-0 md:ml-0 ml-10 h-32 bg-white/50 rounded-2xl flex py-6 xl:px-3 lg:px-3 md:px-3 px-10 cursor-pointer max-[426px]:mb-3'>
               <img src={penDiary} alt="diary" className='h-16 mr-4 mt-3' />
-              <div>
+              <div className='xl:ml-0 lg:ml-0 md:ml-0 ml-5'>
                 <h3 className='text-purple-900 font-semibold'>Entries</h3>
                 <p className='text-purple-900 font-bold text-3xl'>{formatNumber(diary)}</p>
                 <p className='text-purple-900 text-xs'>Total Entries</p>
               </div>
             </div>
-            <div className='w-48 h-32 bg-white/50 rounded-2xl flex py-6 px-5 cursor-pointer'>
-              <img src={streakImage} alt="diary" className='h-16 mr-4 mt-3' />
-              <div>
-                <h3 className='text-purple-900 font-semibold'>Streak</h3>
-                <p className='text-purple-900 font-bold text-3xl'>{formatNumber(streak)}</p>
-                <p className='text-purple-900 text-xs'>Days in a row</p>
+            <div className='xl:flex lg:flex md:flex block xl:gap-3 lg:gap-5 md:gap-5 xl:mt-0 lg:mt-4'>
+              <div className='xl:w-48 lg:w-48 md:w-48 w-70 xl:ml-0 lg:ml-0 md:ml-0 ml-10 h-32 bg-white/50 rounded-2xl flex py-6 xl:px-3 lg:px-3 md:px-3 px-10 cursor-pointer max-[426px]:mb-3'>
+                <img src={streakImage} alt="diary" className='h-16 mr-4 mt-3' />
+                <div className='xl:ml-0 lg:ml-0 md:ml-0 ml-5'>
+                  <h3 className='text-purple-900 font-semibold'>Streak</h3>
+                  <p className='text-purple-900 font-bold text-3xl'>{formatNumber(streak)}</p>
+                  <p className='text-purple-900 text-xs'>Days in a row</p>
+                </div>
               </div>
-            </div>
-            <div className='w-48 h-32 bg-white/50 rounded-2xl flex py-6 px-3 cursor-pointer'>
-              <img src={heart} alt="diary" className='h-12 mr-4 mt-5' />
-              <div>
-                <h3 className='text-purple-900 font-semibold'>Memories</h3>
-                <p className='text-purple-900 font-bold text-3xl'>{formatNumber(memory)}</p>
-                <p className='text-purple-900 text-xs'>Saved Memories</p>
+              <div className='xl:w-48 lg:w-48 md:w-48 w-70 xl:ml-0 lg:ml-0 md:ml-0 ml-10 h-32 bg-white/50 rounded-2xl flex py-6 xl:px-3 lg:px-3 md:px-3 px-10 cursor-pointer'>
+                <img src={heart} alt="diary" className='h-12 mr-4 mt-5' />
+                <div className='xl:ml-0 lg:ml-0 md:ml-0 ml-5'>
+                  <h3 className='text-purple-900 font-semibold'>Memories</h3>
+                  <p className='text-purple-900 font-bold text-3xl'>{formatNumber(memory)}</p>
+                  <p className='text-purple-900 text-xs'>Saved Memories</p>
+                </div>
               </div>
             </div>
           </section>

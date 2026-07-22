@@ -9,8 +9,8 @@ function Mood() {
   }
 
   return (
-    <section className='w-[25.5rem] bg-white/50 rounded-2xl py-5 px-8 '>
-      <h2 className='text-purple-900/80 font-semibold text-lg'>How are you feeling today</h2>
+    <section className='xl:w-[25.5rem] lg:w-[22.5rem] w-[23rem] bg-white/50 rounded-2xl xl:py-5 lg:py-3 md:py-2 py-2 xl:px-8 lg:px-2 md:px-2 md:-mx-4 lg:mx-0'>
+      <h2 className='text-purple-900/80 font-semibold text-lg lg:ml-3 md:ml-3 ml-3'>How are you feeling today</h2>
 
       <div className='bg-pink-200 rounded-lg text-3xl py-3 mt-4'>
 

@@ -45,9 +45,19 @@ function PrevPage() {
         sticker = sticker3;
     }
 
+    const formatNumber = (number) => {
+      if(number >= 1000000){
+        return (number/1000000).toFixed(1).replace(".0", "") + "M";
+      }
+      if(number >= 1000){
+        return(number/1000).toFixed(1).replace(".0","") + "K";
+      }
+      return number
+    }
+
   return (
     <div
-    className='h-screen bg-cover p-10'
+    className='xl:h-[45.6rem] bg-cover xl:p-10 lg:p-10 md:p-5 p-3'
     style={{backgroundImage : `url(${background})`}}>
 
         <div className='bg-white/70 h-[40rem] rounded-2xl py-14 flex justify-center align-middle relative'>
@@ -61,16 +71,16 @@ function PrevPage() {
                 {diary.date}
             </span>
 
-            <textarea readOnly value={diary.description} className='w-full h-[30rem] mt-10 ml-18 py-2 pr-72 border-0 outline-0 text-3xl bg-transparent text-pink-800 indent-2 rounded-2xl font-caveat'></textarea>
+            <textarea readOnly value={diary.description} className='w-full h-[30rem] mt-10 ml-18 py-2 xl:pr-72 lg:pr-60 md:pr-52 pr-10 xl:pl-5 lg:pl-8 md:pl-4 pl-4 border-0 outline-0 text-3xl bg-transparent text-pink-800 indent-2 rounded-2xl font-caveat'></textarea>
 
-            <img src={sticker} alt="" className='absolute bottom-0 right-0 h-[20rem]' />
+            <img src={sticker} alt="" className='absolute bottom-0 right-0 xl:h-[20rem] lg:h-[20rem] md:h-[16rem] h-[12rem]' />
 
-            <div className='absolute bottom-10 left-16 text-xl font-semibold text-orange-900'>
-                Words : {diary.words}
+            <div className='absolute bottom-10 xl:left-16 lg:left-16 md:left-16 left-4 text-xl font-semibold text-orange-900'>
+                Words : {formatNumber(diary.words)}
             </div>
 
-            <div className='absolute bottom-10 left-52 text-xl font-semibold text-orange-900'>
-                Letters : {diary.letters}
+            <div className='absolute bottom-10 xl:left-52 lg:left-52 md:left-52 left-32 text-xl font-semibold text-orange-900'>
+                Letters : {formatNumber(diary.letters)}
             </div>
 
         </div>

@@ -31,7 +31,7 @@ function Hero() {
             Welcome to <br /> 
             <div className="flex">
               <span className="bg-gradient-to-r from-pink-500 to-violet-700 bg-clip-text text-transparent xl:text-9xl md:text-8xl max-[426px]:text-8xl">Feelio</span>
-              <span> <img src={heart} alt="Heart" className="xl:w-64 xl:h-36 md:h-28 rotate-30 -ml-8 md:-ml-4 max-[426px]:h-28" /> </span>  
+              <span> <img src={heart} alt="Heart" className="xl:w-50 xl:h-36 md:h-28 rotate-30 -ml-8 md:-ml-4 max-[426px]:h-24 max-[426px]:ml-0" /> </span>  
             </div>
           </h1>
           
@@ -101,11 +101,11 @@ function Hero() {
 
       {/* banner  */}
 
-      <div style={{backgroundImage:`url(${bannerBG})`}} className='px-48 py-5 mt-12 mx-10 bg-contain bg-center flex w-[85rem] h-[12rem] rounded-2xl'>
+      <div style={{backgroundImage:`url(${bannerBG})`}} className='xl:px-48 py-5 mt-12 xl:mx-10 md:mx-2 mx-5 bg-contain bg-center flex xl:w-[85rem] h-[12rem] rounded-2xl max-[426px]:block max-[426px]:h-[25rem] max-[426px]:bg-no-repeat max-[426px]:bg-cover'>
 
-        <img src={openDiary} alt="" className='h-32' />
+        <img src={openDiary} alt="" className='h-32 max-[426px]:h-26 max-[426px]:ml-24' />
 
-        <div className='text-center justify-center mx-30'>
+        <div className='text-center justify-center mx-4 md:mx-4 lg:mx-24 xl:mx-32'>
           <h3 className='text-3xl font-bold text-pink-800' style={{fontFamily:"serif"}}>Ready to start your journey?</h3>
           <p className='text-purple-900 font-semibold mt-1 text-md'>Create your safe space and write your story.</p>
           <Link to="/signup">
@@ -117,7 +117,7 @@ function Hero() {
           <p className='text-sm mt-3 text-purple-800'>No credit card required.</p>
         </div>
 
-        <img src={cup} alt="" className='h-32' />
+        <img src={cup} alt="" className='h-32 max-[426px]:h-28 max-[426px]:ml-60 max-[426px]:-mt-20' />
 
       </div>
       

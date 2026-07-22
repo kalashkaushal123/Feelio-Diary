@@ -31,8 +31,8 @@ function calender() {
 
 
   return (
-    <section className='w-[28rem] bg-white/60 rounded-2xl py-5 px-8 -mt-5'>
-      <h2 className='text-purple-900 font-bold text-xl text-center mb-8'>
+    <section className='xl:w-[28rem] lg:w-[21rem] md:w-[22rem] w-[23rem] bg-white/60 rounded-2xl xl:py-5 lg:py-3 md:py-3 py-5 xl:px-8 lg:px-3 md:px-2 px-4 -mt-5'>
+      <h2 className='text-purple-900 font-bold text-xl text-center xl:mb-8 lg:5'>
         {monthName} {year}
       </h2>
 
@@ -52,7 +52,7 @@ function calender() {
           return (
             <div
             key={index}
-            className={` h-12 w-12 flex items-center justify-center rounded-full 
+            className={` xl:h-12 lg:h-9 md:h-8 w-12 flex items-center justify-center rounded-full 
             ${isToday ? "bg-pink-700 text-white" : ""}`}>
               {day}
             </div>

@@ -18,7 +18,7 @@
 
   import { IoIosNotificationsOutline } from "react-icons/io";
 
-function Sidebar({user}) {
+function Sidebar({ user, isOpen, setIsOpen }) {
   
   const navigate = useNavigate()
 
@@ -53,7 +53,18 @@ function Sidebar({user}) {
     <>
 
       {/* slidebar  */}
-          <section className="bg-white/50 w-fit h-[44rem] px-4 py-8 fixed top-4 bottom-4 left-4 rounded-2xl z-50">
+          <section className={`xl:bg-white/50 lg:bg-white/50 md:bg-gray-100 bg-gray-100 w-fit h-[44rem] px-4 py-8 fixed top-4 bottom-4 left-4 rounded-2xl z-50
+            transition-transform duration-300 lg:translate-x-0 
+            ${isOpen ? "translate-x-0" : "-translate-x-[120%]"} `}>
+
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 text-3xl text-pink-700 lg:hidden"
+            >
+              ✕
+            </button>
+
+
             <div className="flex ml-2">
               <img src={logo} alt="Logo" className='h-16' />
               <div className="flex flex-col ml-4 text-pink-700">

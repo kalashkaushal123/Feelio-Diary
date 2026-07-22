@@ -58,6 +58,16 @@ function Page1() {
     }
   }
 
+  const formatNumber = (number) => {
+      if(number >= 1000000){
+        return (number/1000000).toFixed(1).replace(".0", "") + "M";
+      }
+      if(number >= 1000){
+        return(number/1000).toFixed(1).replace(".0","") + "K";
+      }
+      return number
+    }
+
 //   console.log(diary);
   
   
@@ -68,9 +78,8 @@ function Page1() {
 
         {/* slide 1  */}
 
-
             <div 
-            className='h-screen bg-center bg-cover p-10 ' 
+            className='xl:h-[45.6rem] bg-center bg-cover xl:p-10 lg:p-10 md:p-5 p-3' 
             style={{backgroundImage: `url(${bg1})`}}>
                 <div 
                 className='bg-white/70 h-[40rem] rounded-2xl py-14 flex justify-center align-middle relative'>
@@ -84,23 +93,23 @@ function Page1() {
                     <textarea 
                     name="dearDiary" 
                     placeholder='Dear Diary...' 
-                    className='w-[82rem] h-[30rem] mt-10 py-2 pr-72 border-0 outline-0 text-3xl bg-transparent text-pink-800 indent-2 rounded-2xl font-caveat'
+                    className='w-[82rem] h-[30rem] mt-10 py-2 xl:pr-72 lg:pr-70 md:pr-52 xl:pl-5 lg:pl-8 md:pl-4 pl-4 border-0 outline-0 text-3xl bg-transparent text-pink-800 indent-2 rounded-2xl font-caveat'
                     value={text}
                     onChange={(e)=>setText(e.target.value)}></textarea>
 
                     <img 
                     src={sticker1} 
                     alt="sticker" 
-                    className=' absolute bottom-0 right-0 h-[20rem]' />
+                    className=' absolute bottom-0 right-0 xl:h-[20rem] lg:h-[20rem] md:h-[16rem] h-[12rem]' />
 
                     <p 
-                    className=' absolute bottom-10 left-16 text-xl font-semibold text-orange-900'>
-                    Words : {wordCounter} 
+                    className=' absolute bottom-10 xl:left-16 lg:left-16 md:left-16 left-4 text-xl font-semibold text-orange-900'>
+                    Words : {formatNumber(wordCounter)} 
                     </p>
 
                     <p 
-                    className=' absolute bottom-10 left-52 text-xl font-semibold text-orange-900'>
-                    Letters : {letterCounter} 
+                    className=' absolute bottom-10 xl:left-52 lg:left-52 md:left-52 left-32 text-xl font-semibold text-orange-900'>
+                    Letters : {formatNumber(letterCounter)} 
                     </p>
 
                     <button

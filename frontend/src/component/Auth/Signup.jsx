@@ -157,7 +157,7 @@ function Signup() {
               </div>
 
               {/* login button  */}
-              <button className='bg-pink-900 text-white font-bold text-lg w-full py-2 mt-10'>
+              <button className='bg-pink-900 text-white font-bold text-lg w-full py-2 mt-10 cursor-pointer'>
                 Signup
               </button>
 
@@ -171,9 +171,9 @@ function Signup() {
 
             
           </div>
-          <div className='flex absolute bottom-0 right-0 max-[426px]:-bottom-25 max-[426px]:-right-12'>
+          <div className='flex absolute bottom-0 right-0 max-[426px]:-bottom-25 max-[426px]:-right-6'>
               <img src={cloud} alt="" className='h-20' />
-              <img src={diary} alt="" className='h-20 -ml-7'/>
+              <img src={diary} alt="" className='h-20 -ml-7 max-[426px]:hidden'/>
           </div> 
           <div className=''>
             <FaHeart className='text-2xl text-pink-600/70 absolute bottom-22 right-14 rotate-10 max-[426px]:-right-4 max-[426px]:bottom-7' />

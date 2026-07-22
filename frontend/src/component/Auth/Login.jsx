@@ -141,7 +141,7 @@ function Login() {
           </div>
           <div className='flex absolute bottom-0 right-0 max-[1025px]:-right-20 max-[1025px]:-bottom-14 max-[769px]:-right-8'>
               <img src={cloud} alt="" className='h-20' />
-              <img src={diary} alt="" className='h-20 -ml-7'/>
+              <img src={diary} alt="" className='h-20 -ml-7 max-[426px]:hidden'/>
           </div> 
           <div className=''>
             <FaHeart className='text-2xl text-pink-600/70 absolute bottom-22 right-14 rotate-10 max-[1025px]:-right-8 max-[769px]:-right-0' />
